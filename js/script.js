@@ -632,6 +632,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
+            // 4. Mở/đóng modal phóng to ảnh
+            const productImage = document.querySelector('.product-detail-image');
+            const imageZoomModal = document.getElementById('image-zoom-modal');
+            if (productImage && imageZoomModal) {
+                const zoomImageEl = imageZoomModal.querySelector('img');
+                const zoomCloseBtn = imageZoomModal.querySelector('.modal-close-btn');
+
+                productImage.addEventListener('click', () => {
+                    // Lấy ảnh gốc chất lượng cao hơn nếu có
+                    zoomImageEl.src = product.image.replace('500x650', '1024x1024');
+                    imageZoomModal.classList.add('is-visible');
+                });
+
+                const closeZoomModal = () => imageZoomModal.classList.remove('is-visible');
+
+                zoomCloseBtn.addEventListener('click', closeZoomModal);
+                imageZoomModal.addEventListener('click', (e) => { if (e.target === imageZoomModal) closeZoomModal(); });
+            }
+
         } else {
             productDetailContainer.innerHTML = '<p style="text-align: center; font-size: 1.2rem;">Sản phẩm này không còn tồn tại tại cửa hàng.</p>';
         }
@@ -649,6 +668,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentFilter = 'all';
     let searchTerm = '';
 
+    // Hàm xóa dấu tiếng Việt để tìm kiếm
+    function removeAccents(str) {
+        return str.normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/đ/g, "d")
+                  .replace(/Đ/g, "D");
+    }
+
     function displayProducts() {
         // Chỉ chạy logic này nếu có productGrid
         if (!productGrid) return;
@@ -663,8 +690,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const filteredProducts = allProducts.filter(product => {
             // Kiểm tra điều kiện lọc theo danh mục
             const matchesFilter = currentFilter === 'all' || product.category === currentFilter;
-            // Kiểm tra điều kiện tìm kiếm theo tên
-            const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase());
+            // Kiểm tra điều kiện tìm kiếm theo tên (không dấu, không phân biệt chữ hoa)
+            const normalizedProductName = removeAccents(product.name.toLowerCase());
+            const normalizedSearchTerm = removeAccents(searchTerm.toLowerCase());
+            const matchesSearch = normalizedProductName.includes(normalizedSearchTerm);
             
             return matchesFilter && matchesSearch;
         });
@@ -761,6 +790,13 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault(); // Ngăn trang tải lại
             searchTerm = searchInput.value;
             currentPage = 1; // Reset về trang 1 khi tìm kiếm
+            displayProducts();
+        });
+
+        // Thêm sự kiện 'input' để tìm kiếm ngay khi người dùng gõ
+        searchInput.addEventListener('input', () => {
+            searchTerm = searchInput.value;
+            currentPage = 1;
             displayProducts();
         });
     }

@@ -93,6 +93,7 @@ header {
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(4px);
 }
 
 header .container {
@@ -272,26 +273,36 @@ html[data-theme="dark"] .moon {
 
 /* --- Button Styles for Dark Theme --- */
 html[data-theme="dark"] .btn {
-    background-color: var(--primary); /* Nền xanh */
-    color: #fff; /* Chữ trắng để tương phản tốt nhất */
-    border-color: var(--primary); /* Viền cùng màu nền */
+    background-color: var(--primary);
+    /* Nền xanh */
+    color: #fff;
+    /* Chữ trắng để tương phản tốt nhất */
+    border-color: var(--primary);
+    /* Viền cùng màu nền */
 }
 
 html[data-theme="dark"] .btn:hover {
-    background-color: #3d8bff; /* Làm màu xanh sáng hơn một chút khi hover */
+    background-color: #3d8bff;
+    /* Làm màu xanh sáng hơn một chút khi hover */
     border-color: #3d8bff;
 }
 
 .btn:hover {
-    background-color: var(--primary); /* Nền chuyển thành màu xanh */
-    color: var(--bg-contrast); /* Chữ chuyển thành màu trắng */
-    transform: translateY(-3px); /* Hiệu ứng nhấc lên */
-    box-shadow: var(--shadow-strong); /* Thêm đổ bóng mạnh hơn */
+    background-color: var(--primary);
+    /* Nền chuyển thành màu xanh */
+    color: var(--bg-contrast);
+    /* Chữ chuyển thành màu trắng */
+    transform: translateY(-3px);
+    /* Hiệu ứng nhấc lên */
+    box-shadow: var(--shadow-strong);
+    /* Thêm đổ bóng mạnh hơn */
 }
 
 .btn:active {
-    transform: translateY(-1px); /* Hiệu ứng nhấn xuống một chút */
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1); /* Đổ bóng nhỏ hơn để tạo cảm giác bị ép xuống */
+    transform: translateY(-1px);
+    /* Hiệu ứng nhấn xuống một chút */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng nhỏ hơn để tạo cảm giác bị ép xuống */
 }
 
 /* --- Products Section --- */
@@ -331,18 +342,31 @@ html[data-theme="dark"] .btn:hover {
 }
 
 .search-container button {
-    padding: 10px 20px;
+    padding: 0 20px;
     border: 1px solid var(--primary);
     background-color: var(--primary);
     color: white;
     border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
     cursor: pointer;
     transition: background-color var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-container button:hover {
+    background-color: var(--primary-dark);
+}
+
+.search-container button:active {
+    transform: scale(0.95);
+    background-color: var(--primary);
 }
 
 .filter-container {
-    text-align: right;
-    margin-bottom: 12px;
+    display: flex;
+    justify-content: center; /* Căn giữa các nút lọc */
+    gap: 10px;
 }
 
 .filter-btn {
@@ -819,7 +843,8 @@ footer {
 }
 
 .btn-danger:hover {
-    background-color: #c0392b; /* Darker red */
+    background-color: #c0392b;
+    /* Darker red */
     border-color: #c0392b;
 }
 
@@ -900,7 +925,8 @@ footer {
     margin-bottom: 30px;
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Căn chỉnh các mục bên trong */
+    justify-content: flex-start;
+    /* Căn chỉnh các mục bên trong */
     gap: 15px;
 }
 
@@ -986,26 +1012,60 @@ footer {
     cursor: pointer;
 }
 
+/* --- Image Zoom Modal Styles --- */
+.product-detail-image {
+    cursor: zoom-in;
+}
+
+#image-zoom-modal .modal-close-btn {
+    color: #fff;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    font-size: 3rem;
+    top: 20px;
+    right: 30px;
+}
+
+.image-zoom-content {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-zoom-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-strong);
+}
+
 /* --- Fly to Cart Animation --- */
 .fly-to-cart-element {
     position: fixed;
     background-color: var(--primary);
-    width: 28px; /* Tăng kích thước một chút */
-    height: 28px; /* Tăng kích thước một chút */
+    width: 28px;
+    /* Tăng kích thước một chút */
+    height: 28px;
+    /* Tăng kích thước một chút */
     border-radius: 50%;
     z-index: 9999;
     opacity: 1;
-    transition: left 0.8s cubic-bezier(0.2, 0.6, 0.9, 0.2), 
-                top 0.8s cubic-bezier(0.3, 0, 0.7, 0.2), 
-                transform 0.8s ease-in, 
-                opacity 0.3s ease-in 0.5s; /* Điều chỉnh: mờ dần muộn hơn và nhanh hơn */
-    pointer-events: none; /* Prevent interaction with the element */
+    transition: left 0.8s cubic-bezier(0.2, 0.6, 0.9, 0.2),
+        top 0.8s cubic-bezier(0.3, 0, 0.7, 0.2),
+        transform 0.8s ease-in,
+        opacity 0.3s ease-in 0.5s;
+    /* Điều chỉnh: mờ dần muộn hơn và nhanh hơn */
+    pointer-events: none;
+    /* Prevent interaction with the element */
 }
 
 @media (max-width: 992px) {
     .checkout-wrapper {
         grid-template-columns: 1fr;
     }
+
     .order-summary {
         position: static;
         margin-top: 40px;
