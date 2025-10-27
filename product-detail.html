@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm - GeminiShop</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-content { padding: 60px 0; }
+        .product-detail-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: flex-start;
+        }
+        .product-detail-image {
+            height: 600px; /* Cố định chiều cao của khung chứa ảnh */
+            border-radius: 8px;
+            overflow: hidden; /* Ẩn phần ảnh thừa */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .product-detail-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Đảm bảo ảnh lấp đầy khung mà không bị méo */
+            object-position: center; /* Căn ảnh vào giữa */
+        }
+        .product-detail-info h1 { font-size: 2.5rem; margin-bottom: 15px; }
+        .product-detail-info .price { font-size: 1.8rem; color: #e74c3c; font-weight: bold; margin-bottom: 20px; }
+        .product-detail-info .description { line-height: 1.8; margin-bottom: 30px; }
+        .product-detail-info .btn { padding: 15px 30px; font-size: 1.1rem; }
+        @media (max-width: 768px) {
+            .product-detail-wrapper { grid-template-columns: 1fr; }
+            .product-detail-image { height: auto; aspect-ratio: 3 / 4; } /* Sử dụng tỷ lệ cho mobile */
+            .product-detail-info h1 { font-size: 2rem; }
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo">GeminiShop</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="products.html">Sản Phẩm</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+            <div class="cart">
+                <button id="theme-toggle" title="Chuyển đổi giao diện">
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                </button>
+                <a href="cart.html" class="cart-link" aria-label="Xem giỏ hàng">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <span id="cart-count">0</span>
+                </a>
+                <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="overlay"></div>
+
+    <main>
+        <section class="page-content">
+            <div class="container">
+                <a href="javascript:history.back()" class="back-link">&larr; Quay lại danh sách sản phẩm</a>
+                <!-- Nội dung chi tiết sản phẩm sẽ được JS chèn vào đây -->
+                <div id="product-detail-container">
+                    <p>Đang tải thông tin sản phẩm...</p>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section about">
+                    <h3 class="logo-text">GeminiShop</h3>
+                    <p>
+                        Điểm đến thời trang trực tuyến, mang đến những sản phẩm chất lượng cao, hợp xu hướng với mức giá phải chăng.
+                    </p>
+                    <div class="socials">
+                        <a href="#" title="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                        <a href="#" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" title="Tiktok"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8.11V11.5a4.5 4.5 0 1 1-8-2.43V15a7 7 0 1 0 7-7h-1.5Z"></path></svg></a>
+                    </div>
+                </div>
+
+                <div class="footer-section links">
+                    <h4>Về Cửa Hàng</h4>
+                    <ul>
+                        <li><a href="about.html">Giới thiệu</a></li>
+                        <li><a href="products.html">Sản phẩm</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="policy.html">Chính sách đổi trả</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section links">
+                    <h4>Hỗ Trợ Khách Hàng</h4>
+                    <ul>
+                        <li><a href="faq.html">Câu hỏi thường gặp (FAQ)</a></li>
+                        <li><a href="how-to-buy.html">Hướng dẫn mua hàng</a></li>
+                        <li><a href="shipping-methods.html">Phương thức vận chuyển</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 GeminiShop | Mọi quyền được bảo lưu.
+            </div>
+        </div>
+        <button id="scroll-top-btn" title="Cuộn lên đầu trang">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19V5M5 12l7-7 7 7"/>
+            </svg>
+        </button>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
