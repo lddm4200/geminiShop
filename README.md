@@ -109,5 +109,5 @@ Mở tệp `index.html` bằng trình duyệt của bạn. Để có trải nghi
 > Dự án này được thiết kế chủ yếu cho mục đích học tập và làm portfolio. Việc sử dụng Google Sheet làm cơ sở dữ liệu có những giới hạn về hiệu suất và số lượng yêu cầu mỗi ngày từ Google. Đối với một cửa hàng có quy mô nhỏ, nó có thể hoạt động tốt. Tuy nhiên, với quy mô lớn hơn, bạn nên cân nhắc xây dựng một hệ thống backend chuyên dụng.
 
 
-
-link web: https://lddm4200.github.io/geminiShop/
+## link web
+> https://lddm4200.github.io/geminiShop/
